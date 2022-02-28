@@ -236,7 +236,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = "Построение киянки в КОМПАС-3D";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MalletParametersPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

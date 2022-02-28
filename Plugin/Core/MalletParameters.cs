@@ -7,6 +7,10 @@ using KompasPlugin;
 
 namespace Core
 {
+
+    /// <summary>
+    /// Класс хранящий параметры киянки
+    /// </summary>
     public class MalletParameters
     {
         /// <summary>
@@ -35,14 +39,14 @@ namespace Core
         /// </summary>
         private static Parameter<int> _headLength =
             new Parameter<int>(ParameterNames.HeadLength,
-                MAX_HEAD_LENGTH, MIN_HEAD_HEIGHT);
+                MAX_HEAD_LENGTH, MIN_HEAD_LENGTH);
 
         /// <summary>
         /// Ширина бойка
         /// </summary>
         private static Parameter<int> _headWidth =
             new Parameter<int>(ParameterNames.HeadWidth,
-                MAX_HEAD_WIDTH, MIN_HEAD_HEIGHT);
+                MAX_HEAD_WIDTH, MIN_HEAD_WIDTH);
 
         /// <summary>
         /// Конастанты минимальных и максимальных значений параметров в мм

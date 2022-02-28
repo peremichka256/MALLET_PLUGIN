@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KompasWrapper
+namespace UnitTests
 {
-    public class MallaetBuilder
+    internal class ParameterTests
     {
     }
 }

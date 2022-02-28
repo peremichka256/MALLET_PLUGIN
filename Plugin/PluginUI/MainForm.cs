@@ -7,24 +7,117 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Core;
+using KompasWrapper;
 
 namespace PluginUI
 {
+    /// <summary>
+    /// Класс хранящий и обрабатывающий пользовательский интерфейс плагина
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Объект класса построителя
+        /// </summary>
+        private MalletBuilder _waveguideBuilder;
+
+        /// <summary>
+        /// Объект класса с параметрами
+        /// </summary>
+        private MalletParameters _waveguideParameters =
+            new MalletParameters();
+
+        /// <summary>
+        /// Словарь содержащий пары (Текстбоксы, имя параметра)
+        /// </summary>
+        private Dictionary<TextBox, ParameterNames> _textBoxesDictionary;
+
+        /// <summary>
+        /// Конструктор главной формы с необходимыми инициализациями
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
+
+            _textBoxesDictionary = new Dictionary<TextBox, ParameterNames>
+            {
+                {HandleDiameterTextBox, ParameterNames.HandleDiameter},
+                {HandleHeightTextBox, ParameterNames.HandleHeight},
+                {HeadHeightTextBox, ParameterNames.HeadHeight},
+                {HeadLengthTextBox, ParameterNames.HeadHeight},
+                {HeadWidthTextBox, ParameterNames.HeadWidth},
+            };
+
+            foreach (var textBox in _textBoxesDictionary)
+            {
+                //textBox.Key.Text = _waveguideParameters
+                //    .GetParameterValueByName(textBox.Value).ToString();
+            }
         }
 
+        /// <summary>
+        /// Устанавливает стиль для проверенного значения
+        /// </summary>
+        /// <param name="sender">Текстбокс</param>
+        private void TextBox_Validated(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                BuildButton.Enabled = true;
+                textBox.BackColor = Color.White;
+                toolTip.Active = false;
+            }
+        }
+
+        /// <summary>
+        /// Общий метод валидации текстбокса
+        /// </summary>
+        private void TextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (!(sender is TextBox textBox)) return;
+
+            try
+            {
+                _textBoxesDictionary.TryGetValue(textBox,
+                    out var parameterInTextBoxName);
+                //_waveguideParameters.SetParameterByName(parameterInTextBoxName,
+                //    double.Parse(textBox.Text));
+                //
+                //if (textBox != anchorageHeightTextBox
+                //    && textBox != anchorageWidthTextBox
+                //    && textBox != crossSectionHeightTextBox
+                //    && textBox != crossSectionWidthTextBox) return;
+                //
+                //anchorageHeightTextBox.Text =
+                //    _waveguideParameters.AnchorageHeight.ToString();
+                //anchorageWidthTextBox.Text =
+                //    _waveguideParameters.AnchorageWidth.ToString();
+                //crossSectionHeightTextBox.Text =
+                //    _waveguideParameters.CrossSectionHeight.ToString();
+                //crossSectionWidthTextBox.Text =
+                //    _waveguideParameters.CrossSectionWidth.ToString();
+            }
+            catch (Exception exception)
+            {
+                BuildButton.Enabled = false;
+                textBox.BackColor = Color.LightSalmon;
+                toolTip.Active = true;
+                toolTip.SetToolTip(textBox, exception.Message);
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// Обработчик нажатия кнопки "Построить"
+        /// </summary>
         private void BuildButton_Click(object sender, EventArgs e)
         {
+            KompasConnector connector = new KompasConnector();
+            _waveguideBuilder =
+                new MalletBuilder(_waveguideParameters, connector);
 
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
+            _waveguideBuilder.BuildMallet();
         }
     }
 }
