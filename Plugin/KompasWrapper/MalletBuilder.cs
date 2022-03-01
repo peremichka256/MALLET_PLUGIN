@@ -47,18 +47,24 @@ namespace KompasWrapper
             _connector.Start();
             _connector.CreateDocument3D();
 
-            BuildMalletHandle(_parameters.HandleDiameter, _parameters.HandleHeight);
-            BuildMalletHead(_parameters.HeadLength, _parameters.HeadWidth, _parameters.HeadHeight);
+            BuildMalletHandle(_parameters.HandleDiameter,
+                _parameters.HandleHeight);
+            BuildMalletHead(_parameters.HeadLength, 
+                _parameters.HeadWidth, _parameters.HeadHeight);
         }
 
         /// <summary>
         /// Метод осуществляющий построение бойка
         /// </summary>
+        /// <param name="headLength">Длина бойка</param>
+        /// <param name="headWidth">Ширина бойка</param>
+        /// <param name="headHeight">Высота бойка</param>
         private void BuildMalletHead(int headLength, int headWidth, int headHeight)
         {
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ, null);
             var doc2d = (ksDocument2D)sketch.BeginEdit();
-            doc2d.ksRectangle(DrawRectangle(-headLength/2, -headWidth/2, headWidth, headLength));
+            doc2d.ksRectangle(DrawRectangle(-headLength/2, 
+                -headWidth/2, headWidth, headLength));
 
             sketch.EndEdit();
             СreateExtrusion(sketch, headHeight);
@@ -67,6 +73,8 @@ namespace KompasWrapper
         /// <summary>
         /// Метод осуществляющий построение ручки
         /// </summary>
+        /// <param name="handleDiameter">Диаметр ручки</param>
+        /// <param name="handleHeight">Высота ручки</param>
         private void BuildMalletHandle(int handleDiameter, int handleHeight)
         {
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ, null);
