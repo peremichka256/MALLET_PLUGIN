@@ -25,7 +25,7 @@ namespace PluginUI
         /// <summary>
         /// Объект класса с параметрами
         /// </summary>
-        private MalletParameters _waveguideParameters =
+        private MalletParameters _malletParameters =
             new MalletParameters();
 
         /// <summary>
@@ -45,14 +45,14 @@ namespace PluginUI
                 {HandleDiameterTextBox, ParameterNames.HandleDiameter},
                 {HandleHeightTextBox, ParameterNames.HandleHeight},
                 {HeadHeightTextBox, ParameterNames.HeadHeight},
-                {HeadLengthTextBox, ParameterNames.HeadHeight},
+                {HeadLengthTextBox, ParameterNames.HeadLength},
                 {HeadWidthTextBox, ParameterNames.HeadWidth},
             };
 
             foreach (var textBox in _textBoxesDictionary)
             {
-                //textBox.Key.Text = _waveguideParameters
-                //    .GetParameterValueByName(textBox.Value).ToString();
+                textBox.Key.Text = _malletParameters
+                    .GetParameterValueByName(textBox.Value).ToString();
             }
         }
 
@@ -81,22 +81,8 @@ namespace PluginUI
             {
                 _textBoxesDictionary.TryGetValue(textBox,
                     out var parameterInTextBoxName);
-                //_waveguideParameters.SetParameterByName(parameterInTextBoxName,
-                //    double.Parse(textBox.Text));
-                //
-                //if (textBox != anchorageHeightTextBox
-                //    && textBox != anchorageWidthTextBox
-                //    && textBox != crossSectionHeightTextBox
-                //    && textBox != crossSectionWidthTextBox) return;
-                //
-                //anchorageHeightTextBox.Text =
-                //    _waveguideParameters.AnchorageHeight.ToString();
-                //anchorageWidthTextBox.Text =
-                //    _waveguideParameters.AnchorageWidth.ToString();
-                //crossSectionHeightTextBox.Text =
-                //    _waveguideParameters.CrossSectionHeight.ToString();
-                //crossSectionWidthTextBox.Text =
-                //    _waveguideParameters.CrossSectionWidth.ToString();
+                _malletParameters.SetParameterByName(parameterInTextBoxName,
+                    int.Parse(textBox.Text));
             }
             catch (Exception exception)
             {
@@ -115,7 +101,7 @@ namespace PluginUI
         {
             KompasConnector connector = new KompasConnector();
             _waveguideBuilder =
-                new MalletBuilder(_waveguideParameters, connector);
+                new MalletBuilder(_malletParameters, connector);
 
             _waveguideBuilder.BuildMallet();
         }

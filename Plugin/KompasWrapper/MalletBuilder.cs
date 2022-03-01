@@ -46,22 +46,35 @@ namespace KompasWrapper
 
             _connector.Start();
             _connector.CreateDocument3D();
+
+            BuildMalletHandle(_parameters.HandleDiameter, _parameters.HandleHeight);
+            BuildMalletHead(_parameters.HeadLength, _parameters.HeadWidth, _parameters.HeadHeight);
         }
 
         /// <summary>
         /// Метод осуществляющий построение бойка
         /// </summary>
-        private void BuildMalletHead()
+        private void BuildMalletHead(int headLength, int headWidth, int headHeight)
         {
+            var sketch = CreateSketch(Obj3dType.o3d_planeXOZ, null);
+            var doc2d = (ksDocument2D)sketch.BeginEdit();
+            doc2d.ksRectangle(DrawRectangle(-headLength/2, -headWidth/2, headWidth, headLength));
 
+            sketch.EndEdit();
+            СreateExtrusion(sketch, headHeight);
         }
 
         /// <summary>
         /// Метод осуществляющий построение ручки
         /// </summary>
-        private void BuildMalletHandle()
+        private void BuildMalletHandle(int handleDiameter, int handleHeight)
         {
+            var sketch = CreateSketch(Obj3dType.o3d_planeXOZ, null);
+            var doc2d = (ksDocument2D)sketch.BeginEdit();
+            doc2d.ksCircle(0, 0, handleDiameter / 2, MainLineStyle);
 
+            sketch.EndEdit();
+            СreateExtrusion(sketch, handleHeight);
         }
 
         /// <summary>

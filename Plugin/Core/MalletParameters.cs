@@ -49,10 +49,25 @@ namespace Core
                 MAX_HEAD_WIDTH, MIN_HEAD_WIDTH);
 
         /// <summary>
+        /// Словарь содержащий пары (Имя параметра, указатель на него)
+        /// </summary>
+        private Dictionary<ParameterNames, Parameter<int>>
+            _parametersDictionary =
+                new Dictionary<ParameterNames, Parameter<int>>()
+                {
+                    {_handleDiameter.Name, _handleDiameter},
+                    {_handleHeight.Name, _handleHeight},
+                    {_headHeight.Name, _headHeight},
+                    {_headLength.Name, _headLength},
+                    {_headWidth.Name, _headWidth}
+                };
+
+        /// <summary>
         /// Конастанты минимальных и максимальных значений параметров в мм
         /// Минимальные значения являются дефолтными
         /// </summary>
         public const int MIN_HANDLE_DIAMETER = 20;
+
         public const int MAX_HANDLE_DIAMETER =
             MAX_HEAD_WIDTH - HANDLE_HEAD_DIFFERENCE;
 
@@ -60,7 +75,8 @@ namespace Core
         public const int MAX_HANDLE_HEIGHT = 400;
 
         public const int MIN_HEAD_HEIGHT = 40;
-        public const int MAX_HEAD_HEIGHT = 
+
+        public const int MAX_HEAD_HEIGHT =
             MAX_HEAD_LENGTH / HANDLE_LENGTH_HEIGHT_MULTIPLIER;
 
         public const int MIN_HEAD_LENGTH = 100;
@@ -73,6 +89,7 @@ namespace Core
         /// Константы ограничений для параметров
         /// </summary>
         public const int HANDLE_HEAD_DIFFERENCE = 10;
+
         public const int HANDLE_LENGTH_HEIGHT_MULTIPLIER = 2;
 
         /// <summary>
@@ -118,6 +135,56 @@ namespace Core
         {
             get => _headWidth.Value;
             set => _headWidth.Value = value;
+        }
+
+        /// <summary>
+        /// Конструктор класса с минимальными значенми по умолчанию
+        /// </summary>
+        public MalletParameters()
+        {
+            this.HeadHeight = MIN_HEAD_HEIGHT;
+            this.HandleDiameter = MIN_HANDLE_DIAMETER;
+            this.HandleHeight = MIN_HANDLE_HEIGHT;
+            this.HeadLength = MIN_HEAD_LENGTH;
+            this.HeadWidth = MIN_HEAD_WIDTH;
+        }
+
+        /// <summary>
+        /// Метод передающй значение в сеттер параметра по имени
+        /// </summary>
+        /// <param name="name">Имя параметра</param>
+        /// <param name="value">Значение</param>
+        public void SetParameterByName(ParameterNames name, int value)
+        {
+            if (_parametersDictionary.ContainsKey(name))
+            {
+                switch (name)
+                {
+                    default:
+                        _parametersDictionary.TryGetValue(name,
+                            out var parameter);
+                        parameter.Value = value;
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод возвращающий значение параметра по имени
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <returns>Значение</returns>
+        public double GetParameterValueByName(ParameterNames name)
+        {
+            if (_parametersDictionary.ContainsKey(name))
+            {
+                _parametersDictionary.TryGetValue(name, out var parameter);
+                return parameter.Value;
+            }
+            else
+            {
+                return double.NaN;
+            }
         }
     }
 }

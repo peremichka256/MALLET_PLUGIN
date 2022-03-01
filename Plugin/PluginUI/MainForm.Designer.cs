@@ -87,6 +87,8 @@
             this.HandleDiameterTextBox.Name = "HandleDiameterTextBox";
             this.HandleDiameterTextBox.Size = new System.Drawing.Size(43, 20);
             this.HandleDiameterTextBox.TabIndex = 3;
+            this.HandleDiameterTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HandleDiameterTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // label2
             // 
@@ -184,6 +186,8 @@
             this.HeadHeightTextBox.Name = "HeadHeightTextBox";
             this.HeadHeightTextBox.Size = new System.Drawing.Size(43, 20);
             this.HeadHeightTextBox.TabIndex = 13;
+            this.HeadHeightTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadHeightTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // HeadLengthTextBox
             // 
@@ -191,6 +195,8 @@
             this.HeadLengthTextBox.Name = "HeadLengthTextBox";
             this.HeadLengthTextBox.Size = new System.Drawing.Size(43, 20);
             this.HeadLengthTextBox.TabIndex = 14;
+            this.HeadLengthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadLengthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // HeadWidthTextBox
             // 
@@ -198,6 +204,8 @@
             this.HeadWidthTextBox.Name = "HeadWidthTextBox";
             this.HeadWidthTextBox.Size = new System.Drawing.Size(43, 20);
             this.HeadWidthTextBox.TabIndex = 15;
+            this.HeadWidthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadWidthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // HandleHeightTextBox
             // 
@@ -205,6 +213,8 @@
             this.HandleHeightTextBox.Name = "HandleHeightTextBox";
             this.HandleHeightTextBox.Size = new System.Drawing.Size(43, 20);
             this.HandleHeightTextBox.TabIndex = 16;
+            this.HandleHeightTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HandleHeightTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // toolTip
             // 
