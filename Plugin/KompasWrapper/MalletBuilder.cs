@@ -26,6 +26,9 @@ namespace KompasWrapper
         /// </summary>
         private const int MainLineStyle = 1;
 
+        /// <summary>
+        /// Размер выступа ручки из бойка для визуального понимания
+        /// </summary>
         private const int HandkeLedge = 1;
 
         /// <summary>
