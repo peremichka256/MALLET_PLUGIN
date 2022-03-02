@@ -33,7 +33,7 @@
             this.MalletParametersPictureBox = new System.Windows.Forms.PictureBox();
             this.BuildButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.HandleDiameterTextBox = new System.Windows.Forms.TextBox();
+            this.HeadWidthTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,9 +43,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.HeadHeightTextBox = new System.Windows.Forms.TextBox();
             this.HeadLengthTextBox = new System.Windows.Forms.TextBox();
-            this.HeadWidthTextBox = new System.Windows.Forms.TextBox();
+            this.HeadHeightTextBox = new System.Windows.Forms.TextBox();
+            this.HandleDiameterTextBox = new System.Windows.Forms.TextBox();
             this.HandleHeightTextBox = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.MalletParametersPictureBox)).BeginInit();
@@ -81,14 +81,14 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Ширина бойка киянки(А)";
             // 
-            // HandleDiameterTextBox
+            // HeadWidthTextBox
             // 
-            this.HandleDiameterTextBox.Location = new System.Drawing.Point(172, 162);
-            this.HandleDiameterTextBox.Name = "HandleDiameterTextBox";
-            this.HandleDiameterTextBox.Size = new System.Drawing.Size(43, 20);
-            this.HandleDiameterTextBox.TabIndex = 3;
-            this.HandleDiameterTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
-            this.HandleDiameterTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
+            this.HeadWidthTextBox.Location = new System.Drawing.Point(172, 12);
+            this.HeadWidthTextBox.Name = "HeadWidthTextBox";
+            this.HeadWidthTextBox.Size = new System.Drawing.Size(43, 20);
+            this.HeadWidthTextBox.TabIndex = 3;
+            this.HeadWidthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadWidthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // label2
             // 
@@ -180,32 +180,32 @@
             this.label10.TabIndex = 11;
             this.label10.Text = "Высота ручки киянки(H)";
             // 
-            // HeadHeightTextBox
-            // 
-            this.HeadHeightTextBox.Location = new System.Drawing.Point(172, 112);
-            this.HeadHeightTextBox.Name = "HeadHeightTextBox";
-            this.HeadHeightTextBox.Size = new System.Drawing.Size(43, 20);
-            this.HeadHeightTextBox.TabIndex = 13;
-            this.HeadHeightTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
-            this.HeadHeightTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
-            // 
             // HeadLengthTextBox
             // 
             this.HeadLengthTextBox.Location = new System.Drawing.Point(172, 62);
             this.HeadLengthTextBox.Name = "HeadLengthTextBox";
             this.HeadLengthTextBox.Size = new System.Drawing.Size(43, 20);
-            this.HeadLengthTextBox.TabIndex = 14;
+            this.HeadLengthTextBox.TabIndex = 13;
             this.HeadLengthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
             this.HeadLengthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
-            // HeadWidthTextBox
+            // HeadHeightTextBox
             // 
-            this.HeadWidthTextBox.Location = new System.Drawing.Point(172, 12);
-            this.HeadWidthTextBox.Name = "HeadWidthTextBox";
-            this.HeadWidthTextBox.Size = new System.Drawing.Size(43, 20);
-            this.HeadWidthTextBox.TabIndex = 15;
-            this.HeadWidthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
-            this.HeadWidthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
+            this.HeadHeightTextBox.Location = new System.Drawing.Point(172, 112);
+            this.HeadHeightTextBox.Name = "HeadHeightTextBox";
+            this.HeadHeightTextBox.Size = new System.Drawing.Size(43, 20);
+            this.HeadHeightTextBox.TabIndex = 14;
+            this.HeadHeightTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadHeightTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
+            // 
+            // HandleDiameterTextBox
+            // 
+            this.HandleDiameterTextBox.Location = new System.Drawing.Point(172, 162);
+            this.HandleDiameterTextBox.Name = "HandleDiameterTextBox";
+            this.HandleDiameterTextBox.Size = new System.Drawing.Size(43, 20);
+            this.HandleDiameterTextBox.TabIndex = 15;
+            this.HandleDiameterTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HandleDiameterTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // HandleHeightTextBox
             // 
@@ -226,9 +226,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(446, 428);
             this.Controls.Add(this.HandleHeightTextBox);
-            this.Controls.Add(this.HeadWidthTextBox);
-            this.Controls.Add(this.HeadLengthTextBox);
+            this.Controls.Add(this.HandleDiameterTextBox);
             this.Controls.Add(this.HeadHeightTextBox);
+            this.Controls.Add(this.HeadLengthTextBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
@@ -238,7 +238,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.HandleDiameterTextBox);
+            this.Controls.Add(this.HeadWidthTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BuildButton);
             this.Controls.Add(this.MalletParametersPictureBox);
@@ -257,7 +257,7 @@
         private System.Windows.Forms.PictureBox MalletParametersPictureBox;
         private System.Windows.Forms.Button BuildButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox HandleDiameterTextBox;
+        private System.Windows.Forms.TextBox HeadWidthTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -267,9 +267,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox HeadHeightTextBox;
         private System.Windows.Forms.TextBox HeadLengthTextBox;
-        private System.Windows.Forms.TextBox HeadWidthTextBox;
+        private System.Windows.Forms.TextBox HeadHeightTextBox;
+        private System.Windows.Forms.TextBox HandleDiameterTextBox;
         private System.Windows.Forms.TextBox HandleHeightTextBox;
         private System.Windows.Forms.ToolTip toolTip;
     }

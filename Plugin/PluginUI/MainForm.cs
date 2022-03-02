@@ -42,11 +42,11 @@ namespace PluginUI
 
             _textBoxesDictionary = new Dictionary<TextBox, ParameterNames>
             {
-                {HandleDiameterTextBox, ParameterNames.HandleDiameter},
-                {HandleHeightTextBox, ParameterNames.HandleHeight},
-                {HeadHeightTextBox, ParameterNames.HeadHeight},
-                {HeadLengthTextBox, ParameterNames.HeadLength},
                 {HeadWidthTextBox, ParameterNames.HeadWidth},
+                {HandleHeightTextBox, ParameterNames.HandleHeight},
+                {HeadLengthTextBox, ParameterNames.HeadLength},
+                {HeadHeightTextBox, ParameterNames.HeadHeight},
+                {HandleDiameterTextBox, ParameterNames.HandleDiameter},
             };
 
             foreach (var textBox in _textBoxesDictionary)
@@ -83,6 +83,17 @@ namespace PluginUI
                     out var parameterInTextBoxName);
                 _malletParameters.SetParameterByName(parameterInTextBoxName,
                     int.Parse(textBox.Text));
+
+                if (textBox == HeadWidthTextBox)
+                {
+                    HandleDiameterTextBox.Text =
+                        _malletParameters.HandleDiameter.ToString();
+                }
+                else if (textBox == HeadLengthTextBox)
+                {
+                    HeadHeightTextBox.Text =
+                        _malletParameters.HeadHeight.ToString();
+                }
             }
             catch (Exception exception)
             {

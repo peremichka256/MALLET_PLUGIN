@@ -53,7 +53,7 @@ namespace Core
         /// </summary>
         private Dictionary<ParameterNames, Parameter<int>>
             _parametersDictionary =
-                new Dictionary<ParameterNames, Parameter<int>>()
+                new Dictionary<ParameterNames, Parameter<int>>
                 {
                     {_handleDiameter.Name, _handleDiameter},
                     {_handleHeight.Name, _handleHeight},
@@ -67,9 +67,8 @@ namespace Core
         /// Минимальные значения являются дефолтными
         /// </summary>
         public const int MIN_HANDLE_DIAMETER = 20;
-
         public const int MAX_HANDLE_DIAMETER =
-            MAX_HEAD_WIDTH - HANDLE_HEAD_DIFFERENCE;
+            MIN_HEAD_WIDTH - HANDLE_HEAD_DIFFERENCE;
 
         public const int MIN_HANDLE_HEIGHT = 150;
         public const int MAX_HANDLE_HEIGHT = 400;
@@ -77,7 +76,7 @@ namespace Core
         public const int MIN_HEAD_HEIGHT = 40;
 
         public const int MAX_HEAD_HEIGHT =
-            MAX_HEAD_LENGTH / HANDLE_LENGTH_HEIGHT_MULTIPLIER;
+            MIN_HEAD_LENGTH / HANDLE_LENGTH_HEIGHT_MULTIPLIER;
 
         public const int MIN_HEAD_LENGTH = 100;
         public const int MAX_HEAD_LENGTH = 200;
@@ -125,7 +124,16 @@ namespace Core
         public int HeadLength
         {
             get => _headLength.Value;
-            set => _headLength.Value = value;
+            set
+            {
+                _headLength.Value = value;
+                _headHeight.Max = value / HANDLE_LENGTH_HEIGHT_MULTIPLIER;
+
+                if (HeadHeight > _headHeight.Max)
+                {
+                    HeadHeight = _headHeight.Max;
+                }
+            }
         }
 
         /// <summary>
@@ -134,7 +142,16 @@ namespace Core
         public int HeadWidth
         {
             get => _headWidth.Value;
-            set => _headWidth.Value = value;
+            set
+            {
+                _headWidth.Value = value;
+                _handleDiameter.Max = value - HANDLE_HEAD_DIFFERENCE;
+
+                if (HandleDiameter > _handleDiameter.Max)
+                {
+                    HandleDiameter = _handleDiameter.Max;
+                }
+            }
         }
 
         /// <summary>
@@ -160,6 +177,12 @@ namespace Core
             {
                 switch (name)
                 {
+                    case ParameterNames.HeadLength:
+                        HeadLength = value;
+                        break;
+                    case ParameterNames.HeadWidth:
+                        HeadWidth = value;
+                        break;
                     default:
                         _parametersDictionary.TryGetValue(name,
                             out var parameter);

@@ -26,6 +26,8 @@ namespace KompasWrapper
         /// </summary>
         private const int MainLineStyle = 1;
 
+        private const int HandkeLedge = 1;
+
         /// <summary>
         /// Конструктор класса
         /// </summary>
@@ -77,7 +79,8 @@ namespace KompasWrapper
         /// <param name="handleHeight">Высота ручки</param>
         private void BuildMalletHandle(int handleDiameter, int handleHeight)
         {
-            var sketch = CreateSketch(Obj3dType.o3d_planeXOZ, null);
+            var sketch = CreateSketch(Obj3dType.o3d_planeXOZ,
+                CreateOffsetPlane(Obj3dType.o3d_planeXOZ, HandkeLedge));
             var doc2d = (ksDocument2D)sketch.BeginEdit();
             doc2d.ksCircle(0, 0, handleDiameter / 2, MainLineStyle);
 
@@ -156,6 +159,26 @@ namespace KompasWrapper
             ksSketch.SetPlane(plane);
             sketch.Create();
             return ksSketch;
+        }
+
+        /// <summary>
+        /// Метод смещающий плоскость
+        /// </summary>
+        /// <param name="plane">Плоскость</param>
+        /// <param name="offset">Расстояние смещения</param>
+        /// <returns>Объект смещения</returns>
+        private ksEntity CreateOffsetPlane(Obj3dType plane, double offset)
+        {
+            var offsetEntity = (ksEntity)_connector
+                .Part.NewEntity((short)Obj3dType.o3d_planeOffset);
+            var offsetDef = (ksPlaneOffsetDefinition)offsetEntity
+                .GetDefinition();
+            offsetDef.SetPlane((ksEntity)_connector
+                .Part.NewEntity((short)plane));
+            offsetDef.offset = offset;
+            offsetDef.direction = false;
+            offsetEntity.Create();
+            return offsetEntity;
         }
     }
 }
