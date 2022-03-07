@@ -49,6 +49,13 @@ namespace Core
                 MAX_HEAD_WIDTH, MIN_HEAD_WIDTH);
 
         /// <summary>
+        /// Размер фаски на бойке
+        /// </summary>
+        private static Parameter<int> _radiusCrossTie =
+            new Parameter<int>(ParameterNames.RadiusCrossTie,
+                MAX_RADIUS_CROSS_TIE, MIN_RADIUS_CROSS_TIE);
+
+        /// <summary>
         /// Словарь содержащий пары (Имя параметра, указатель на него)
         /// </summary>
         private Dictionary<ParameterNames, Parameter<int>>
@@ -59,7 +66,8 @@ namespace Core
                     {_handleHeight.Name, _handleHeight},
                     {_headHeight.Name, _headHeight},
                     {_headLength.Name, _headLength},
-                    {_headWidth.Name, _headWidth}
+                    {_headWidth.Name, _headWidth},
+                    {_radiusCrossTie.Name, _radiusCrossTie}
                 };
 
         /// <summary>
@@ -83,6 +91,9 @@ namespace Core
 
         public const int MIN_HEAD_WIDTH = 40;
         public const int MAX_HEAD_WIDTH = 80;
+
+        public const int MIN_RADIUS_CROSS_TIE = 1;
+        public const int MAX_RADIUS_CROSS_TIE = 4;
 
         /// <summary>
         /// Константы ограничений для параметров
@@ -155,6 +166,15 @@ namespace Core
         }
 
         /// <summary>
+        /// Задаёт или возвращает размер фаски на бойке
+        /// </summary>
+        public int RadiusCrossTie
+        {
+            get => _radiusCrossTie.Value;
+            set => _radiusCrossTie.Value = value;
+        }
+
+        /// <summary>
         /// Конструктор класса с минимальными значенми по умолчанию
         /// </summary>
         public MalletParameters()
@@ -164,6 +184,8 @@ namespace Core
             this.HandleHeight = MIN_HANDLE_HEIGHT;
             this.HeadLength = MIN_HEAD_LENGTH;
             this.HeadWidth = MIN_HEAD_WIDTH;
+            this.RadiusCrossTie = MIN_RADIUS_CROSS_TIE;
+
         }
 
         /// <summary>

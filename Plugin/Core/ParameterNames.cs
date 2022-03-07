@@ -28,6 +28,11 @@
         /// <summary>
         /// Высота ручки киянки
         /// </summary>
-        HandleHeight
+        HandleHeight,
+
+        /// <summary>
+        /// Размер фаски на гранях бойка
+        /// </summary>
+        RadiusCrossTie
     }
 }

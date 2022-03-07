@@ -52,10 +52,24 @@ namespace KompasWrapper
             _connector.Start();
             _connector.CreateDocument3D();
 
+            //Вызов методов создания основных частей киянки
             BuildMalletHandle(_parameters.HandleDiameter,
                 _parameters.HandleHeight);
             BuildMalletHead(_parameters.HeadLength, 
                 _parameters.HeadWidth, _parameters.HeadHeight);
+
+            //Создание фаски на гранях бойка
+            var xCoordOfEdge = _parameters.HeadWidth / 2;
+            var yCoordOfEdge = _parameters.HeadHeight / 2;
+            var zCoordOfEdge = _parameters.HeadLength / 2;
+            CreateFillet(_parameters.RadiusCrossTie,
+                xCoordOfEdge, yCoordOfEdge, zCoordOfEdge);
+            CreateFillet(_parameters.RadiusCrossTie,
+                -xCoordOfEdge, yCoordOfEdge, -zCoordOfEdge);
+            CreateFillet(_parameters.RadiusCrossTie,
+                -xCoordOfEdge, yCoordOfEdge, zCoordOfEdge);
+            CreateFillet(_parameters.RadiusCrossTie,
+                xCoordOfEdge, yCoordOfEdge, -zCoordOfEdge);
         }
 
         /// <summary>
@@ -182,6 +196,32 @@ namespace KompasWrapper
             offsetDef.direction = false;
             offsetEntity.Create();
             return offsetEntity;
+        }
+
+        /// <summary>
+        /// Создания фаски на выбранном ребре
+        /// </summary>
+        /// <param name="radiusCrossTie">Радиус</param>
+        /// <param name="x">X-координата точки на ребре</param>
+        /// <param name="y">Y-координата точки на ребре</param>
+        /// <param name="z">Z-координата точки на ребре</param>
+        private void CreateFillet(double radiusCrossTie, double x,
+            double y, double z)
+        {
+            var filletEntity = (ksEntity)_connector
+                .Part.NewEntity((short)Obj3dType.o3d_fillet);
+            var filletDef =
+                (ksFilletDefinition)filletEntity.GetDefinition();
+            filletDef.radius = radiusCrossTie;
+            filletDef.tangent = true;
+            ksEntityCollection iArray = (ksEntityCollection)filletDef.array();
+            ksEntityCollection iCollection = (ksEntityCollection)_connector
+                .Part.EntityCollection((short)Obj3dType.o3d_edge);
+
+            iCollection.SelectByPoint(x, y, z);
+            var iEdge = iCollection.Last();
+            iArray.Add(iEdge);
+            filletEntity.Create();
         }
     }
 }
