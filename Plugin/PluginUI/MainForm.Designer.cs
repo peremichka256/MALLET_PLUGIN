@@ -249,6 +249,8 @@
             this.RadiusCrossTieTextBox.Name = "RadiusCrossTieTextBox";
             this.RadiusCrossTieTextBox.Size = new System.Drawing.Size(43, 20);
             this.RadiusCrossTieTextBox.TabIndex = 19;
+            this.RadiusCrossTieTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.RadiusCrossTieTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // MainForm
             // 

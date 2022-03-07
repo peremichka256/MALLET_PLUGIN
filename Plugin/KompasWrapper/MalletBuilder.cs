@@ -59,9 +59,9 @@ namespace KompasWrapper
                 _parameters.HeadWidth, _parameters.HeadHeight);
 
             //Создание фаски на гранях бойка
-            var xCoordOfEdge = _parameters.HeadWidth / 2;
-            var yCoordOfEdge = _parameters.HeadHeight / 2;
-            var zCoordOfEdge = _parameters.HeadLength / 2;
+            var xCoordOfEdge = _parameters.HeadLength / 2;
+            var yCoordOfEdge = _parameters.HeadHeight /2;
+            var zCoordOfEdge = _parameters.HeadWidth / 2;
             CreateFillet(_parameters.RadiusCrossTie,
                 xCoordOfEdge, yCoordOfEdge, zCoordOfEdge);
             CreateFillet(_parameters.RadiusCrossTie,

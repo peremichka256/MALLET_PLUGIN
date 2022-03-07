@@ -95,9 +95,6 @@ namespace PluginUI
                     HeadHeightTextBox.Text =
                         _malletParameters.HeadHeight.ToString();
                 }
-
-                label5.Text = "F";
-                label5.Refresh();
             }
             catch (Exception exception)
             {

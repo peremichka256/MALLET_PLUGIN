@@ -185,7 +185,6 @@ namespace Core
             this.HeadLength = MIN_HEAD_LENGTH;
             this.HeadWidth = MIN_HEAD_WIDTH;
             this.RadiusCrossTie = MIN_RADIUS_CROSS_TIE;
-
         }
 
         /// <summary>
