@@ -37,9 +37,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.HeadHeightLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.HandleDiameterLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -123,15 +123,15 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Длина бойка киянки(B)";
             // 
-            // label5
+            // HeadHeightLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(12, 127);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 15);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "(от 40 до B/2 мм)";
+            this.HeadHeightLabel.AutoSize = true;
+            this.HeadHeightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.HeadHeightLabel.Location = new System.Drawing.Point(12, 127);
+            this.HeadHeightLabel.Name = "HeadHeightLabel";
+            this.HeadHeightLabel.Size = new System.Drawing.Size(108, 15);
+            this.HeadHeightLabel.TabIndex = 8;
+            this.HeadHeightLabel.Text = "(от 40 до 100 мм)";
             // 
             // label6
             // 
@@ -143,15 +143,15 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Высота бойка киянки(С)";
             // 
-            // label7
+            // HandleDiameterLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(12, 177);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 15);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "(от 20 до A-10 мм)";
+            this.HandleDiameterLabel.AutoSize = true;
+            this.HandleDiameterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.HandleDiameterLabel.Location = new System.Drawing.Point(12, 177);
+            this.HandleDiameterLabel.Name = "HandleDiameterLabel";
+            this.HandleDiameterLabel.Size = new System.Drawing.Size(101, 15);
+            this.HandleDiameterLabel.TabIndex = 10;
+            this.HandleDiameterLabel.Text = "(от 20 до 70 мм)";
             // 
             // label8
             // 
@@ -266,9 +266,9 @@
             this.Controls.Add(this.HeadLengthTextBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.HandleDiameterLabel);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.HeadHeightLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -296,9 +296,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label HeadHeightLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label HandleDiameterLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;

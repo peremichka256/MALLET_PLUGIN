@@ -48,7 +48,6 @@ namespace KompasWrapper
         /// </summary>
         public void BuildMallet()
         {
-
             _connector.Start();
             _connector.CreateDocument3D();
 

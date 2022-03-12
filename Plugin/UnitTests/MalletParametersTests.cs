@@ -8,8 +8,11 @@ using NUnit.Framework;
 
 namespace UnitTests
 {
+    //TODO: дописать аттрибут
+    [TestFixture]
     public class MalletParametersTests
     {
+        //TODO:
         /// <summary>
         /// Объект класса с параметрами для тестов
         /// </summary>
@@ -18,9 +21,9 @@ namespace UnitTests
         /// <summary>
         /// Словарь имён и максимальных значений параметров
         /// </summary>
-        private Dictionary<ParameterNames, int>
+        private readonly Dictionary<ParameterNames, int>
             _maxValuesOfParameterDictionary =
-                new Dictionary<ParameterNames, int>()
+                new ()
                 {
                     {
                         ParameterNames.HeadLength,
@@ -41,6 +44,10 @@ namespace UnitTests
                     {
                         ParameterNames.HandleDiameter,
                         MalletParameters.MAX_HANDLE_DIAMETER
+                    },
+                    {
+                        ParameterNames.RadiusCrossTie,
+                        MalletParameters.MAX_RADIUS_CROSS_TIE
                     },
                 };
 
@@ -107,7 +114,9 @@ namespace UnitTests
                           && _testMalletParameters.HeadWidth
                           == MalletParameters.MAX_HEAD_WIDTH
                           && _testMalletParameters.HandleHeight
-                          == MalletParameters.MAX_HANDLE_HEIGHT,
+                          == MalletParameters.MAX_HANDLE_HEIGHT
+                          && _testMalletParameters.RadiusCrossTie
+                          == MalletParameters.MAX_RADIUS_CROSS_TIE,
                 "Возникает, если геттер вернул не то значение");
         }
 

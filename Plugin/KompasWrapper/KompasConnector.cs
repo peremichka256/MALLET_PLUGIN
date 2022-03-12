@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace KompasWrapper
 {
+    //TODO: XML
+    /// <summary>
+    /// Класс связи с КОМПАС-3D через API
+    /// </summary>
     public class KompasConnector
     {
         /// <summary>
@@ -25,18 +29,12 @@ namespace KompasWrapper
         /// <summary>
         /// Свойство возвращающее объект интерфейса API
         /// </summary>
-        public KompasObject Object
-        {
-            get => _object;
-        }
+        public KompasObject Object => _object;
 
         /// <summary>
         /// Свойство возвращающее компонент сборки
         /// </summary>
-        public ksPart Part
-        {
-            get => _part;
-        }
+        public ksPart Part => _part;
 
         /// <summary>
         /// Метод начала работы КОМПАС-3D
