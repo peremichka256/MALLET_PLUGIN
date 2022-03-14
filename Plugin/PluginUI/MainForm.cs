@@ -139,9 +139,10 @@ namespace PluginUI
                 {
                     _malletBuilder.BuildMallet();
                     var computerInfo = new ComputerInfo();
-                    var usedMemory = computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory;
+                    var usedMemory = (computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory)
+                        * 0.000000000931322574615478515625;
                     countModel++;
-                    writter.WriteLineAsync($"{countModel}\t{stopWatch.ElapsedMilliseconds}\t{usedMemory}");
+                    writter.WriteLineAsync($"{countModel}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
                     writter.Flush();
                 }
             }
