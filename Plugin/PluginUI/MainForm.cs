@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Core;
 using KompasWrapper;
+using Microsoft.VisualBasic.Devices;
 
 namespace PluginUI
 {
@@ -21,7 +24,7 @@ namespace PluginUI
         /// <summary>
         /// Объект класса построителя
         /// </summary>
-        private MalletBuilder _waveguideBuilder;
+        private MalletBuilder _malletBuilder;
 
         /// <summary>
         /// Объект класса с параметрами
@@ -123,11 +126,26 @@ namespace PluginUI
         /// </summary>
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            KompasConnector connector = new KompasConnector();
-            _waveguideBuilder =
+            var connector = new KompasConnector();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            _malletBuilder =
                 new MalletBuilder(_malletParameters, connector);
 
-            _waveguideBuilder.BuildMallet();
+            int countModel = 0;
+            using (StreamWriter writter = new StreamWriter("D:\\Рабочий стол\\log.txt", true))
+            {
+                while (true)
+                {
+                    _malletBuilder.BuildMallet();
+                    var computerInfo = new ComputerInfo();
+                    var usedMemory = computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory;
+                    countModel++;
+                    writter.WriteLineAsync($"{countModel}\t{stopWatch.ElapsedMilliseconds}\t{usedMemory}");
+                    writter.Flush();
+                }
+            }
+
         }
     }
 }
