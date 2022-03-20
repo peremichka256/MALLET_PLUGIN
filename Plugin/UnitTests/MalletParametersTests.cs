@@ -13,9 +13,10 @@ namespace UnitTests
     {
         //TODO:
         /// <summary>
-        /// Объект класса с параметрами для тестов
+        /// Свойство возвращающее новый обект класса MalletParameters
         /// </summary>
-        private MalletParameters _testMalletParameters;
+        private MalletParameters DefaultParameters =>
+            new MalletParameters();
 
         /// <summary>
         /// Словарь имён и максимальных значений параметров
@@ -54,12 +55,12 @@ namespace UnitTests
                             + "в сеттер параметра по его имени")]
         public void TestSetParameterByName()
         {
-            _testMalletParameters = new MalletParameters();
+            var testMalletParameters = DefaultParameters;
         
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                _testMalletParameters.SetParameterByName(
+                testMalletParameters.SetParameterByName(
                     parameterMaxValue.Key, parameterMaxValue.Value);
             }
         
@@ -68,7 +69,7 @@ namespace UnitTests
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                if (_testMalletParameters.GetParameterValueByName(
+                if (testMalletParameters.GetParameterValueByName(
                         parameterMaxValue.Key) != parameterMaxValue.Value)
                 {
                     errorCounter++;
@@ -82,16 +83,16 @@ namespace UnitTests
         [Test(Description = "Тест на геттер значения параметра по имени")]
         public void TestGetParameterByName()
         {
-            _testMalletParameters = new MalletParameters();
+            var testMalletParameters = DefaultParameters;
         
             var newValue = (MalletParameters.MIN_HEAD_LENGTH
                             + MalletParameters.MAX_HEAD_LENGTH) / 2;
             ParameterNames testParameterName =
                 ParameterNames.HeadLength;
-            _testMalletParameters
+            testMalletParameters
                 .SetParameterByName(testParameterName, newValue);
         
-            Assert.AreEqual(newValue, _testMalletParameters
+            Assert.AreEqual(newValue, testMalletParameters
                     .GetParameterValueByName(testParameterName),
                 "Из геттера вернулось неверное значение");
         }
@@ -99,22 +100,22 @@ namespace UnitTests
         [Test(Description = "Позитивный тест на геттеры параметров")]
         public void TestParameterGet()
         {
-            _testMalletParameters = new MalletParameters();
+            var testMalletParameters = DefaultParameters;
 
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                _testMalletParameters.SetParameterByName(
+                testMalletParameters.SetParameterByName(
                     parameterMaxValue.Key, parameterMaxValue.Value);
             }
 
-            Assert.IsTrue(_testMalletParameters.HeadLength
+            Assert.IsTrue(testMalletParameters.HeadLength
                           == MalletParameters.MAX_HEAD_LENGTH
-                          && _testMalletParameters.HeadWidth
+                          && testMalletParameters.HeadWidth
                           == MalletParameters.MAX_HEAD_WIDTH
-                          && _testMalletParameters.HandleHeight
+                          && testMalletParameters.HandleHeight
                           == MalletParameters.MAX_HANDLE_HEIGHT
-                          && _testMalletParameters.ChamferRadius
+                          && testMalletParameters.ChamferRadius
                           == MalletParameters.MAX_CHAMFER_RADIUS,
                 "Возникает, если геттер вернул не то значение");
         }
@@ -122,14 +123,14 @@ namespace UnitTests
         [Test(Description = "Тест на сеттер длины бойка")]
         public void TestHeadLength_Set()
         {
-            _testMalletParameters = new MalletParameters();
+            var testMalletParameters = DefaultParameters;
 
-            _testMalletParameters.HeadLength = MalletParameters.MAX_HEAD_LENGTH;
-            _testMalletParameters.HeadHeight = MalletParameters.MAX_HEAD_LENGTH 
+            testMalletParameters.HeadLength = MalletParameters.MAX_HEAD_LENGTH;
+            testMalletParameters.HeadHeight = MalletParameters.MAX_HEAD_LENGTH 
                 / MalletParameters.HANDLE_LENGTH_HEIGHT_MULTIPLIER;
-            _testMalletParameters.HeadLength = MalletParameters.MIN_HEAD_LENGTH;
+            testMalletParameters.HeadLength = MalletParameters.MIN_HEAD_LENGTH;
 
-            Assert.AreEqual(_testMalletParameters.HeadHeight,
+            Assert.AreEqual(testMalletParameters.HeadHeight,
                 MalletParameters.MIN_HEAD_LENGTH
                 / MalletParameters.HANDLE_LENGTH_HEIGHT_MULTIPLIER, 
                 "Сеттер не поменял знаечние зависимого параметра");
@@ -138,16 +139,42 @@ namespace UnitTests
         [Test(Description = "Тест на сеттер ширины бойка")]
         public void TestHeadWidth_Set()
         {
-            _testMalletParameters = new MalletParameters();
+            var testMalletParameters = DefaultParameters;
 
-            _testMalletParameters.HeadWidth = MalletParameters.MAX_HEAD_WIDTH;
-            _testMalletParameters.HandleDiameter = MalletParameters.MAX_HEAD_WIDTH
+            testMalletParameters.HeadWidth = MalletParameters.MAX_HEAD_WIDTH;
+            testMalletParameters.HandleDiameter = MalletParameters.MAX_HEAD_WIDTH
                                                    - MalletParameters.HANDLE_HEAD_DIFFERENCE;
-            _testMalletParameters.HeadWidth = MalletParameters.MIN_HEAD_WIDTH;
+            testMalletParameters.HeadWidth = MalletParameters.MIN_HEAD_WIDTH;
 
-            Assert.AreEqual(_testMalletParameters.HandleDiameter,
+            Assert.AreEqual(testMalletParameters.HandleDiameter,
                 MalletParameters.MIN_HEAD_WIDTH - MalletParameters.HANDLE_HEAD_DIFFERENCE,
                 "Сеттер не поменял знаечние зависимого параметра");
+        }
+
+        [Test(Description = "Тест на геттер минимума параметра по имени")]
+        public void TestGetParameterMinByName()
+        {
+            var testMalletParameters = DefaultParameters;
+            
+            ParameterNames testParameterName =
+                ParameterNames.HeadLength;
+
+            Assert.AreEqual(MalletParameters.MIN_HEAD_LENGTH, 
+                testMalletParameters.GetParameterMinByName(testParameterName),
+                "Из геттера вернулось неверное значение минимума");
+        }
+
+        [Test(Description = "Тест на геттер максимума параметра по имени")]
+        public void TestGetParameterMaxByName()
+        {
+            var testMalletParameters = DefaultParameters;
+
+            ParameterNames testParameterName =
+                ParameterNames.HeadLength;
+
+            Assert.AreEqual(MalletParameters.MAX_HEAD_LENGTH,
+                testMalletParameters.GetParameterMaxByName(testParameterName),
+                "Из геттера вернулось неверное значение максимума");
         }
     }
 }

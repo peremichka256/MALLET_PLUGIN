@@ -21,7 +21,7 @@ namespace PluginUI
         /// <summary>
         /// Объект класса построителя
         /// </summary>
-        private MalletBuilder _waveguideBuilder;
+        private MalletBuilder _malletBuilder;
 
         /// <summary>
         /// Объект класса с параметрами
@@ -120,8 +120,6 @@ namespace PluginUI
         private void BuildButton_Click(object sender, EventArgs e)
         {
             var connector = new KompasConnector();
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
             _malletBuilder =
                 new MalletBuilder(_malletParameters, connector);
 
