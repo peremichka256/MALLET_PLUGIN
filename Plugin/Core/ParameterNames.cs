@@ -33,6 +33,6 @@
         /// <summary>
         /// Размер фаски на гранях бойка
         /// </summary>
-        RadiusCrossTie
+        ChamferRadius
     }
 }

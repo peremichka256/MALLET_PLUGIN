@@ -48,7 +48,7 @@ namespace PluginUI
                 {HeadLengthTextBox, ParameterNames.HeadLength},
                 {HeadHeightTextBox, ParameterNames.HeadHeight},
                 {HandleDiameterTextBox, ParameterNames.HandleDiameter},
-                {RadiusCrossTieTextBox, ParameterNames.RadiusCrossTie}
+                {ChamferRadiusTextBox, ParameterNames.ChamferRadius}
             };
 
             foreach (var textBox in _textBoxesDictionary)
@@ -86,26 +86,22 @@ namespace PluginUI
                 _malletParameters.SetParameterByName(parameterInTextBoxName,
                     int.Parse(textBox.Text));
 
+                //TODO: Опустить в параметры
                 if (textBox == HeadWidthTextBox)
                 {
                     HandleDiameterTextBox.Text =
                         _malletParameters.HandleDiameter.ToString();
-                    HandleDiameterLabel.Text =$"(от " +
-                        $"{MalletParameters.MIN_HANDLE_DIAMETER} до " +
-                        $@"{ _malletParameters.HeadWidth 
-                            - MalletParameters.HANDLE_HEAD_DIFFERENCE} мм)";
+                    HandleDiameterLabel.Text = CollectRangeLabelTextByName(
+                        ParameterNames.HandleDiameter);
                     HandleDiameterLabel.Refresh();
                 }
                 else if (textBox == HeadLengthTextBox)
                 {
                     HeadHeightTextBox.Text =
-                        _malletParameters.HeadHeight.ToString(); 
-                    HeadHeightLabel.Text = $"(от " +
-                        $"{MalletParameters.MIN_HEAD_HEIGHT} до " +
-                        $@"{ _malletParameters.HeadLength 
-                            / MalletParameters.HANDLE_LENGTH_HEIGHT_MULTIPLIER}" +
-                        "мм)";
-                    HeadHeightLabel.Refresh();
+                        _malletParameters.HeadHeight.ToString();
+                    HeadHeightLabel.Text = CollectRangeLabelTextByName(
+                        ParameterNames.HeadHeight);
+                    HandleDiameterLabel.Refresh();
                 }
             }
             catch (Exception exception)
@@ -123,11 +119,26 @@ namespace PluginUI
         /// </summary>
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            KompasConnector connector = new KompasConnector();
-            _waveguideBuilder =
+            var connector = new KompasConnector();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            _malletBuilder =
                 new MalletBuilder(_malletParameters, connector);
 
-            _waveguideBuilder.BuildMallet();
+            _malletBuilder.BuildMallet();
+        }
+
+        /// <summary>
+        /// Метод объединяющий минимальное и максимальное значение параметра
+        /// в одну строку
+        /// </summary>
+        /// <param name="name">Имя параметра</param>
+        /// <returns>Строка с диапазоном допустимых значения</returns>
+        private string CollectRangeLabelTextByName(ParameterNames name)
+        {
+            return $"(from "
+                   + $"{_malletParameters.GetParameterMinByName(name)} to "
+                   + $"{_malletParameters.GetParameterMaxByName(name)} mm)";
         }
     }
 }

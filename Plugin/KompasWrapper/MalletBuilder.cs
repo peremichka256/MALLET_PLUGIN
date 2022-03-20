@@ -29,7 +29,7 @@ namespace KompasWrapper
         /// <summary>
         /// Размер выступа ручки из бойка для визуального понимания
         /// </summary>
-        private const int HandkeLedge = 1;
+        private const int HandleLedge = 1;
 
         /// <summary>
         /// Конструктор класса
@@ -59,15 +59,15 @@ namespace KompasWrapper
 
             //Создание фаски на гранях бойка
             var xCoordOfEdge = _parameters.HeadLength / 2;
-            var yCoordOfEdge = _parameters.HeadHeight /2;
+            var yCoordOfEdge = _parameters.HeadHeight / 2;
             var zCoordOfEdge = _parameters.HeadWidth / 2;
-            CreateFillet(_parameters.RadiusCrossTie,
+            CreateFillet(_parameters.ChamferRadius,
                 xCoordOfEdge, yCoordOfEdge, zCoordOfEdge);
-            CreateFillet(_parameters.RadiusCrossTie,
+            CreateFillet(_parameters.ChamferRadius,
                 -xCoordOfEdge, yCoordOfEdge, -zCoordOfEdge);
-            CreateFillet(_parameters.RadiusCrossTie,
+            CreateFillet(_parameters.ChamferRadius,
                 -xCoordOfEdge, yCoordOfEdge, zCoordOfEdge);
-            CreateFillet(_parameters.RadiusCrossTie,
+            CreateFillet(_parameters.ChamferRadius,
                 xCoordOfEdge, yCoordOfEdge, -zCoordOfEdge);
         }
 
@@ -96,7 +96,7 @@ namespace KompasWrapper
         private void BuildMalletHandle(int handleDiameter, int handleHeight)
         {
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ,
-                CreateOffsetPlane(Obj3dType.o3d_planeXOZ, HandkeLedge));
+                CreateOffsetPlane(Obj3dType.o3d_planeXOZ, HandleLedge));
             var doc2d = (ksDocument2D)sketch.BeginEdit();
             doc2d.ksCircle(0, 0, handleDiameter / 2, MainLineStyle);
 
@@ -200,18 +200,18 @@ namespace KompasWrapper
         /// <summary>
         /// Создания фаски на выбранном ребре
         /// </summary>
-        /// <param name="radiusCrossTie">Радиус</param>
+        /// <param name="chamferRadius">Радиус</param>
         /// <param name="x">X-координата точки на ребре</param>
         /// <param name="y">Y-координата точки на ребре</param>
         /// <param name="z">Z-координата точки на ребре</param>
-        private void CreateFillet(double radiusCrossTie, double x,
+        private void CreateFillet(double chamferRadius, double x,
             double y, double z)
         {
             var filletEntity = (ksEntity)_connector
                 .Part.NewEntity((short)Obj3dType.o3d_fillet);
             var filletDef =
                 (ksFilletDefinition)filletEntity.GetDefinition();
-            filletDef.radius = radiusCrossTie;
+            filletDef.radius = chamferRadius;
             filletDef.tangent = true;
             ksEntityCollection iArray = (ksEntityCollection)filletDef.array();
             ksEntityCollection iCollection = (ksEntityCollection)_connector

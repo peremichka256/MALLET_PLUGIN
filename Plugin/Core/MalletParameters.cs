@@ -51,9 +51,9 @@ namespace Core
         /// <summary>
         /// Размер фаски на бойке
         /// </summary>
-        private static Parameter<int> _radiusCrossTie =
-            new Parameter<int>(ParameterNames.RadiusCrossTie,
-                MAX_RADIUS_CROSS_TIE, MIN_RADIUS_CROSS_TIE);
+        private static Parameter<int> _chamferRadius =
+            new Parameter<int>(ParameterNames.ChamferRadius,
+                MAX_CHAMFER_RADIUS, MIN_CHAMFER_RADIUS);
 
         /// <summary>
         /// Словарь содержащий пары (Имя параметра, указатель на него)
@@ -67,7 +67,7 @@ namespace Core
                     {_headHeight.Name, _headHeight},
                     {_headLength.Name, _headLength},
                     {_headWidth.Name, _headWidth},
-                    {_radiusCrossTie.Name, _radiusCrossTie}
+                    {_chamferRadius.Name, _chamferRadius}
                 };
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace Core
         public const int MIN_HEAD_WIDTH = 40;
         public const int MAX_HEAD_WIDTH = 80;
 
-        public const int MIN_RADIUS_CROSS_TIE = 1;
-        public const int MAX_RADIUS_CROSS_TIE = 4;
+        public const int MIN_CHAMFER_RADIUS = 1;
+        public const int MAX_CHAMFER_RADIUS = 4;
 
         /// <summary>
         /// Константы ограничений для параметров
@@ -168,10 +168,10 @@ namespace Core
         /// <summary>
         /// Задаёт или возвращает размер фаски на бойке
         /// </summary>
-        public int RadiusCrossTie
+        public int ChamferRadius
         {
-            get => _radiusCrossTie.Value;
-            set => _radiusCrossTie.Value = value;
+            get => _chamferRadius.Value;
+            set => _chamferRadius.Value = value;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Core
             this.HandleHeight = MIN_HANDLE_HEIGHT;
             this.HeadLength = MIN_HEAD_LENGTH;
             this.HeadWidth = MIN_HEAD_WIDTH;
-            this.RadiusCrossTie = MIN_RADIUS_CROSS_TIE;
+            this.ChamferRadius = MIN_CHAMFER_RADIUS;
         }
 
         /// <summary>
@@ -218,10 +218,34 @@ namespace Core
         /// </summary>
         /// <param name="name">Имя</param>
         /// <returns>Значение</returns>
-        public double GetParameterValueByName(ParameterNames name)
+        public int GetParameterValueByName(ParameterNames name)
         {
             _parametersDictionary.TryGetValue(name, out var parameter);
             return parameter.Value;
+        }
+
+        /// <summary>
+        /// Метод возвращающий минимальное значение параметра
+        /// по имени
+        /// </summary>
+        /// <param name="name">Имя параметра</param>
+        /// <returns>Значения минимума</returns>
+        public int GetParameterMinByName(ParameterNames name)
+        {
+            _parametersDictionary.TryGetValue(name, out var parameter);
+            return parameter.Min;
+        }
+
+        /// <summary>
+        /// Метод возвращающий максимальное значение параметра
+        /// по имени
+        /// </summary>
+        /// <param name="name">Имя параметра</param>
+        /// <returns>Значения максимума</returns>
+        public int GetParameterMaxByName(ParameterNames name)
+        {
+            _parametersDictionary.TryGetValue(name, out var parameter);
+            return parameter.Max;
         }
     }
 }
