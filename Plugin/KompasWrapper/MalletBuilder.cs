@@ -1,5 +1,4 @@
-﻿using System;
-using Core;
+﻿using Core;
 using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;

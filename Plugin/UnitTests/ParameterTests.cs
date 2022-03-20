@@ -1,6 +1,5 @@
 ﻿using System;
 using Core;
-using KompasPlugin;
 using NUnit.Framework;
 
 namespace UnitTests
